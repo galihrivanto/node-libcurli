@@ -69,9 +69,7 @@ jobs:
 
     - name: Build curl-impersonate
       run: |
-        cd deps/curl-impersonate
-        ./build.sh
-        cd ../..
+        ./scripts/build-deps.sh
 
     - name: Install dependencies
       run: npm ci
@@ -81,7 +79,7 @@ jobs:
 
     - name: Package binary
       run: |
-        node-pre-gyp package
+        npm run package
         ls -la build/stage || true
         find . -name "*.tar.gz" || true
 
