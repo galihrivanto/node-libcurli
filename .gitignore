@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Build
+build/
+dist/
+
+# Node-gyp
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db

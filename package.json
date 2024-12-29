@@ -1,0 +1,70 @@
+{
+    "name": "@galihrivanto/node-libcurli",
+    "version": "0.1.0",
+    "description": "Node.js bindings for curl-impersonate library",
+    "main": "lib/index.js",
+    "types": "lib/index.d.ts",
+    "files": [
+      "lib",
+      "src",
+      "binding.gyp",
+      "deps/curl-impersonate.gyp",
+      "scripts"
+    ],
+    "scripts": {
+      "install": "node-pre-gyp install --fallback-to-build",
+      "build": "node-gyp rebuild && tsc",
+      "clean": "node-gyp clean && rimraf lib",
+      "rebuild": "node-gyp rebuild",
+      "prepare": "npm run build",
+      "package": "node-pre-gyp package",
+      "test": "jest"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/galihrivanto/node-libcurli.git"
+    },
+    "keywords": [
+      "curl",
+      "curl-impersonate",
+      "http",
+      "https",
+      "native",
+      "binding"
+    ],
+    "author": "Galih Rivanto",
+    "license": "MIT",
+    "bugs": {
+      "url": "https://github.com/galihrivanto/node-libcurli/issues"
+    },
+    "homepage": "https://github.com/galihrivanto/node-libcurli#readme",
+    "dependencies": {
+      "nan": "github:JCMais/nan#fix/electron-failures",
+      "node-addon-api": "^7.0.0",
+      "node-gyp": "^10.0.1",
+      "@mapbox/node-pre-gyp": "^1.0.0"
+    },
+    "devDependencies": {
+      "@types/node": "^20.0.0",
+      "@typescript-eslint/eslint-plugin": "^6.0.0",
+      "@typescript-eslint/parser": "^6.0.0",
+      "eslint": "^8.0.0",
+      "jest": "^29.0.0",
+      "rimraf": "^5.0.0",
+      "typescript": "^5.0.0"
+    },
+    "engines": {
+      "node": ">=16.0.0"
+    },
+    "gypfile": true,
+    "publishConfig": {
+        "access": "public"
+    },
+    "binary": {
+        "module_name": "node_libcurl",
+        "module_path": "./lib/binding/{configuration}/{node_abi}-{platform}-{arch}/",
+        "remote_path": "./releases/download/v{version}/",
+        "package_name": "{module_name}-v{version}-{node_abi}-{platform}-{arch}.tar.gz",
+        "host": "https://github.com/galihrivanto/node-libcurli/releases/download/"
+    }
+  }
