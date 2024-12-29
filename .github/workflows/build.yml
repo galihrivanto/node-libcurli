@@ -13,7 +13,7 @@ jobs:
     
     strategy:
       matrix:
-        node-version: [16.x, 18.x, 20.x]
+        node-version: [18.x, 20.x]
 
     steps:
     - uses: actions/checkout@v3
@@ -29,7 +29,9 @@ jobs:
     - name: Install system dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y build-essential libssl-dev libnghttp2-dev libbrotli-dev zlib1g-dev
+        sudo apt-get install -y build-essential libssl-dev libnghttp2-dev libbrotli-dev zlib1g-dev \
+          python3 python3-pip ninja-build gyp pkg-config
+        sudo pip3 install gyp-next
 
     - name: Build curl-impersonate
       run: |
