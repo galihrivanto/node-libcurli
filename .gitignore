@@ -11,6 +11,7 @@ build/
 
 # Keep lib directory but ignore compiled binaries in bindings
 lib/binding/*
+lib/**/*.node
 
 # deps lib
 deps/lib/*
