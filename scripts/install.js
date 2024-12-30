@@ -18,14 +18,24 @@ packageJson.binary.package_name = packageJson.binary.package_name.replace('{brow
 fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
 
 try {
-    // Run node-pre-gyp package
-    const result = spawnSync('node-pre-gyp', ['package'], {
+    // Try to install pre-built binary first
+    console.log('Attempting to install pre-built binary...');
+    const installResult = spawnSync('node-pre-gyp', ['install'], {
         stdio: 'inherit',
         shell: true
     });
 
-    if (result.status !== 0) {
-        throw new Error('Failed to package');
+    // If install fails, fallback to build
+    if (installResult.status !== 0) {
+        console.log('Pre-built binary not available, falling back to build...');
+        const buildResult = spawnSync('node-pre-gyp', ['rebuild'], {
+            stdio: 'inherit',
+            shell: true
+        });
+
+        if (buildResult.status !== 0) {
+            throw new Error('Failed to build');
+        }
     }
 } finally {
     // Restore original package.json
