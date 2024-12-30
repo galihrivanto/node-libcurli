@@ -13,9 +13,6 @@ jobs:
     
     strategy:
       matrix:
-        browser:
-          - chrome
-          - ff
         node-version:
           - 18
           - 20
@@ -53,7 +50,6 @@ jobs:
 
     - name: Install dependencies
       run: |
-        npm config set browser ${{ matrix.browser }}
         npm ci
 
     - name: Build TypeScript
@@ -61,13 +57,12 @@ jobs:
 
     - name: Build Binary
       run: |
-        npm config set browser ${{ matrix.browser }}
-        npm run build:binary
+        npm run package
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: binaries-${{ matrix.os }}-${{ matrix.node-version }}-${{ matrix.browser }}
+        name: binaries-${{ matrix.os }}-${{ matrix.node-version }}
         path: build/**/*.tar.gz
 
   release:

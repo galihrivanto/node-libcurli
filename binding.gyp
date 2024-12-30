@@ -3,7 +3,7 @@
     'module_name': 'node_libcurl',
     'module_path': '<(module_root_dir)/lib',
     'deps_dir': '<(module_root_dir)/deps/curl-impersonate/build/dist',
-    'curl_config_bin': '<!(node -e "const browser = process.env.npm_config_browser || \'ff\'; const path = require(\'path\'); console.log(path.join(process.env.MODULE_ROOT_DIR || process.cwd(), \'deps/curl-impersonate/build/dist/bin/curl-impersonate-\' + browser + \'-config\'))")'
+    'curl_config_bin': '<(deps_dir)/bin/curl-impersonate-ff-config'
   },
   'targets': [
     {

@@ -13,10 +13,8 @@
   ],
   "scripts": {
     "install": "node-pre-gyp install --fallback-to-build",
-    "build": "tsc",
-    "build:binary": "node-pre-gyp rebuild package",
-    "clean": "node-pre-gyp clean && rimraf lib",
-    "prepare": "npm run build",
+    "build": "node-gyp rebuild && tsc",
+    "clean": "node-pre-gyp clean && rimraf lib/binding",
     "package": "node-pre-gyp package"
   },
   "repository": {
@@ -63,7 +61,7 @@
     "module_name": "node_libcurl",
     "module_path": "./lib/binding/{configuration}/{node_abi}-{platform}-{arch}",
     "remote_path": "v{version}",
-    "package_name": "{module_name}-v{version}-{node_abi}-{platform}-{arch}-%(browser).tar.gz",
+    "package_name": "{module_name}-v{version}-{node_abi}-{platform}-{arch}.tar.gz",
     "host": "https://github.com/galihrivanto/node-libcurli/releases/download"
   }
 }
