@@ -12,13 +12,12 @@
     "scripts"
   ],
   "scripts": {
-    "install": "node scripts/install.js",
-    "build": "node-gyp rebuild && tsc",
-    "clean": "node-gyp clean && rimraf lib",
-    "rebuild": "node-gyp rebuild",
+    "install": "node-pre-gyp install --fallback-to-build",
+    "build": "tsc",
+    "build:binary": "node-pre-gyp rebuild package",
+    "clean": "node-pre-gyp clean && rimraf lib",
     "prepare": "npm run build",
-    "package": "node scripts/package.js",
-    "test": "jest"
+    "package": "node-pre-gyp package"
   },
   "repository": {
     "type": "git",
