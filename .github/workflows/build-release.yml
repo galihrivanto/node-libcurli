@@ -52,26 +52,23 @@ jobs:
         ./scripts/build-deps.sh
 
     - name: Install dependencies
-      run: npm_config_browser=${{ matrix.browser }} npm ci
+      run: |
+        npm config set browser ${{ matrix.browser }}
+        npm ci
 
     - name: Build TypeScript
       run: npm run build
 
     - name: Build Binary
       run: |
-        export npm_config_browser=${{ matrix.browser }}
+        npm config set browser ${{ matrix.browser }}
         npm run build:binary
-        # Rename the file to include the browser
-        cd build/stage/releases/download/v*
-        for f in *.tar.gz; do
-          mv "$f" "${f/\{browser\}/${{ matrix.browser }}}"
-        done
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
         name: binaries-${{ matrix.os }}-${{ matrix.node-version }}-${{ matrix.browser }}
-        path: build/stage/**/*.tar.gz
+        path: build/**/*.tar.gz
 
   release:
     needs: build
@@ -86,16 +83,31 @@ jobs:
       with:
         path: artifacts
 
-    - name: Prepare artifacts for release
+    - name: List artifacts
       run: |
-        mkdir -p release
-        find artifacts -type f -name "*.tar.gz" -exec cp {} release/ \;
-        ls -la release/
+        find artifacts -type f -name "*.tar.gz"
 
     - name: Create Release
       uses: softprops/action-gh-release@v1
       with:
-        files: release/*.tar.gz
+        files: artifacts/**/*.tar.gz
         generate_release_notes: true
       env:
         GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20.x'
+        registry-url: 'https://registry.npmjs.org'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build TypeScript
+      run: npm run build
+
+    - name: Publish to npm
+      run: npm publish --access public
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
