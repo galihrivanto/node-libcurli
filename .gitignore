@@ -9,6 +9,12 @@ dist/
 # Node-gyp
 build/
 
+# Keep lib directory but ignore compiled binaries in bindings
+lib/binding/*
+
+# deps lib
+deps/lib/*
+
 # IDE
 .vscode/
 .idea/

@@ -9,11 +9,16 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     
     strategy:
       matrix:
-        node-version: [18.x, 20.x]
+        node-version:
+          - 18
+          - 20
+        os:
+          - ubuntu-20.04
+          - macOS-14
 
     steps:
     - uses: actions/checkout@v3
@@ -26,13 +31,18 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
 
-    - name: Install system dependencies
+    - if: runner.os == 'Linux'
+      name: Install Linux system dependencies
       run: |
         sudo apt-get update
         sudo apt-get install -y build-essential libssl-dev libnghttp2-dev libbrotli-dev zlib1g-dev \
           python3 python3-pip ninja-build gyp pkg-config
         sudo pip3 install gyp-next
         sudo ln -s /usr/bin/python3 /usr/bin/python || true
+
+    - if: runner.os == 'macOS'
+      name: Install macOS system dependencies
+      run: brew install coreutils wget automake libtool cmake gnu-sed m4 autoconf groff
 
     - name: Build curl-impersonate
       run: |
@@ -44,51 +54,46 @@ jobs:
     - name: Build
       run: npm run build
 
-    # Upload artifacts if using Node 20.x
-    - name: Package and Upload Artifacts
-      if: matrix.node-version == '20.x'
+    - name: Package binary
+      run: |
+        npm run package
+        ls -la build/stage || true
+        find . -name "*.tar.gz" || true
+
+    - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: build-artifacts
-        path: |
-          build/
-          dist/
-          lib/
+        name: binaries-${{ matrix.os }}-${{ matrix.node-version }}
+        path: build/**/*.tar.gz
 
-  publish:
+  release:
     needs: build
-    if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
-    
+    if: startsWith(github.ref, 'refs/tags/v')
+
     steps:
     - uses: actions/checkout@v3
-      with:
-        submodules: recursive
 
-    - name: Use Node.js
+    - name: Download all artifacts
+      uses: actions/download-artifact@v3
+      with:
+        path: artifacts
+
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: artifacts/**/*.tar.gz
+        generate_release_notes: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+
+    - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '20.x'
         registry-url: 'https://registry.npmjs.org'
 
-    # Download artifacts from build job
-    - name: Download build artifacts
-      uses: actions/download-artifact@v3
-      with:
-        name: build-artifacts
-        path: .
-
-    # Create GitHub Release with binaries
-    - name: Create Release
-      uses: softprops/action-gh-release@v1
-      with:
-        files: build/**/*.tar.gz
-        generate_release_notes: true
-      env:
-        GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-
-    # Publish to npm
-    - name: Publish to NPM
-      run: npm publish
+    - name: Publish to npm
+      run: npm publish --access public
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

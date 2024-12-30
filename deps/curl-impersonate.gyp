@@ -9,7 +9,19 @@
       "conditions": [
         ["OS=='linux'", {
           "libraries": [
-            "<!@(find curl-impersonate/build/curl-*/lib -name '*.so' -o -name '*.a' | head -n 1)",
+            "-Wl,-Bstatic",
+            "<!@(find curl-impersonate/build/curl-*/lib -name '*.a' | head -n 1)",
+            "-lssl",
+            "-lcrypto",
+            "-lnghttp2",
+            "-lbrotlidec",
+            "-lz"
+          ]
+        }],
+        ["OS=='mac'", {
+          "libraries": [
+            "-Wl,-static",
+            "<!@(find curl-impersonate/build/curl-*/lib -name '*.a' | head -n 1)",
             "-lssl",
             "-lcrypto",
             "-lnghttp2",
