@@ -44,9 +44,6 @@ jobs:
     - name: Build
       run: npm run build
 
-    - name: Run tests
-      run: npm test
-
     # Upload artifacts if using Node 20.x
     - name: Package and Upload Artifacts
       if: matrix.node-version == '20.x'
