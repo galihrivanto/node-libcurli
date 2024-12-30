@@ -52,12 +52,8 @@ jobs:
       run: |
         npm ci
 
-    - name: Build TypeScript
+    - name: Build Native and TypeScript
       run: npm run build
-
-    - name: Build Binary
-      run: |
-        npm run package
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
@@ -100,7 +96,7 @@ jobs:
       run: npm ci
 
     - name: Build TypeScript
-      run: npm run build
+      run: npm run build:ts
 
     - name: Publish to npm
       run: npm publish --access public

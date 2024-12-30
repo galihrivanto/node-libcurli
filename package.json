@@ -13,7 +13,9 @@
   ],
   "scripts": {
     "install": "node-pre-gyp install --fallback-to-build",
-    "build": "node-gyp rebuild && tsc",
+    "build:native": "node-pre-gyp rebuild",
+    "build:ts": "tsc",
+    "build": "npm run build:native && npm run build:ts",
     "clean": "node-pre-gyp clean && rimraf lib/binding",
     "package": "node-pre-gyp package"
   },
