@@ -61,9 +61,9 @@
   },
   "binary": {
     "module_name": "node_libcurl",
-    "module_path": "./lib/binding/{configuration}/{node_abi}-{platform}-{arch}-{browser}/",
-    "remote_path": "./releases/download/v{version}/",
-    "package_name": "{module_name}-v{version}-{node_abi}-{platform}-{arch}-{browser}.tar.gz",
-    "host": "https://github.com/galihrivanto/node-libcurli/releases/download/"
+    "module_path": "./lib/binding/{configuration}/{node_abi}-{platform}-{arch}",
+    "remote_path": "v{version}",
+    "package_name": "{module_name}-v{version}-{node_abi}-{platform}-{arch}-%(browser).tar.gz",
+    "host": "https://github.com/galihrivanto/node-libcurli/releases/download"
   }
 }
