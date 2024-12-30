@@ -79,6 +79,10 @@ jobs:
       with:
         path: artifacts
 
+    - name: List artifacts
+      run: |
+        find artifacts -type f -name "*.tar.gz"
+
     - name: Create Release
       uses: softprops/action-gh-release@v1
       with:
