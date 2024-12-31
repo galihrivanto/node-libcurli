@@ -9,11 +9,12 @@ const nodeAbi = process.versions.modules;
 const platform = process.platform;
 const arch = process.arch;
 const moduleName = pkg.binary.module_name;
+const version = pkg.version;
 
 // Define paths
 const baseDir = path.join(__dirname, '..');
 const bindingPath = path.join(baseDir, 'lib', 'binding', 'Release', `node-v${nodeAbi}-${platform}-${arch}`);
-const packageName = `${moduleName}-node-v${nodeAbi}-${platform}-${arch}.tar.gz`;
+const packageName = `${moduleName}-v${version}-node-v${nodeAbi}-${platform}-${arch}.tar.gz`;
 const packagePath = path.join(baseDir, 'build', packageName);
 
 // Ensure the build directory exists
