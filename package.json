@@ -1,6 +1,6 @@
 {
   "name": "@galihrivanto/node-libcurli",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Node.js bindings for curl-impersonate library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -14,12 +14,11 @@
   ],
   "scripts": {
     "install": "node-pre-gyp install --fallback-to-build",
-    "postinstall": "node scripts/postinstall.js",
     "build:native": "node-pre-gyp rebuild",
     "build:ts": "tsc",
     "build": "npm run build:native && npm run build:ts",
     "clean": "node-pre-gyp clean && rimraf dist",
-    "package": "node-pre-gyp package"
+    "package": "node scripts/package.js"
   },
   "repository": {
     "type": "git",
