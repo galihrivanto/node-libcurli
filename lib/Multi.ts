@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 import { NodeLibcurlNativeBinding } from './types'
+import { getBindings } from './binding'
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const bindings: NodeLibcurlNativeBinding = require('../lib/binding/node_libcurl.node')
+const bindings: NodeLibcurlNativeBinding = getBindings()
 
 /**
  * This is a Node.js wrapper around the binding {@link MultiNativeBinding | native Multi class}.
