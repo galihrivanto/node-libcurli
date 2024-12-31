@@ -8,6 +8,7 @@ import { NodeLibcurlNativeBinding } from './types'
 import { CurlShareOption } from './enum/CurlShareOption'
 import { getBindings } from './binding'
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const bindings: NodeLibcurlNativeBinding = getBindings()
 
 /**

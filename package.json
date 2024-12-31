@@ -34,7 +34,9 @@
     "build": "npm run build:native && npm run build:ts",
     "clean": "node-pre-gyp clean && rimraf dist",
     "package": "node scripts/package.js",
-    "example": "node examples/simple.js"
+    "example:simple": "node examples/simple.js",
+    "example:curly": "node examples/curly.js",
+    "gen:constants": "node scripts/build-constants.js"
   },
   "repository": {
     "type": "git",
@@ -64,6 +66,8 @@
     "@types/node": "^20.0.0",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
+    "cheerio": "^1.0.0",
+    "tslib": "^2.0.0",
     "eslint": "^8.0.0",
     "jest": "^29.0.0",
     "rimraf": "^5.0.0",

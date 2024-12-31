@@ -380,12 +380,9 @@ const create = (defaultOptions: CurlyOptions = {}): CurlyFunction => {
             return
           }
 
-          const contentTypeEntry =
-            headers.length > 0
-              ? Object.entries(headers[headers.length - 1]).find(
-                  ([k]) => k.toLowerCase() === 'content-type',
-                )
-              : null
+          const contentTypeEntry = Object.entries(
+            headers[headers.length - 1],
+          ).find(([k]) => k.toLowerCase() === 'content-type')
 
           let contentType = (
             contentTypeEntry ? contentTypeEntry[1] : ''
