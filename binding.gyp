@@ -21,7 +21,6 @@
         'src/Http2PushFrameHeaders.cc',
       ],
       'include_dirs': [
-        "<!(node -p \"require('node-addon-api').include\")",
         "<!(node -e \"require('nan')\")", 
         "<(module_root_dir)/deps/curl-impersonate/build/curl-8.1.1/include"
       ],
@@ -29,9 +28,33 @@
         ['OS=="linux"', {
           'defines': [
             'CURL_STATICLIB',
+            'USE_NSS',
+          ],
+          'include_dirs': [
+            '<(module_root_dir)/deps/curl-impersonate/build/nss-3.92/dist/Release/include/nss',
+            '<(module_root_dir)/deps/curl-impersonate/build/nss-3.92/dist/Release/include/nspr',
           ],
           'libraries': [
-            '<!@(<(deps_dir)/bin/curl-impersonate-ff-config --static-libs)',
+            '-L<(module_root_dir)/deps/curl-impersonate/build/dist/lib',
+            '-L<(module_root_dir)/deps/curl-impersonate/build/nss-3.92/dist/Release/lib',
+            '-Wl,-rpath,\'$$ORIGIN/../../deps/curl-impersonate/build/dist/lib\'',
+            '-Wl,-rpath,\'$$ORIGIN/../../deps/curl-impersonate/build/nss-3.92/dist/Release/lib\'',
+            '-lcurl-impersonate-ff',
+            '-lssl3',
+            '-lsmime3',
+            '-lnss3',
+            '-lnssutil3',
+            '-lplds4',
+            '-lplc4',
+            '-lnspr4',
+            '-pthread',
+            '-ldl',
+            '-lz',
+            '-lzstd',
+            '-lbrotlidec',
+            '-lnghttp2',
+            '-lldap',
+            '-llber'
           ]
         }]
       ]

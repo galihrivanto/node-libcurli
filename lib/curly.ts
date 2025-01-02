@@ -263,7 +263,7 @@ export interface CurlyFunction extends HttpMethodCalls {
   defaultResponseBodyParsers: CurlyResponseBodyParsersProperty
 }
 
-const create = (defaultOptions: CurlyOptions = {}): CurlyFunction => {
+export const create = (defaultOptions: CurlyOptions = {}): CurlyFunction => {
   function curly<ResultData>(
     url: string,
     options: CurlyOptions = {},
