@@ -13,13 +13,11 @@ jobs:
     
     strategy:
       matrix:
-        node-version: [18, 20]
-        os: [ubuntu-20.04]
-        include:
-          # Add Fedora container build
-          - os: ubuntu-latest
-            container: fedora:latest
-            node-version: 20
+        node-version:
+          - 18
+        os:
+          - ubuntu-20.04
+          #- macOS-14
 
     steps:
     - uses: actions/checkout@v3
@@ -32,8 +30,8 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
 
-    - if: runner.os == 'Linux' && !matrix.container
-      name: Install Ubuntu dependencies
+    - if: runner.os == 'Linux'
+      name: Install Linux system dependencies
       run: |
         sudo apt-get update
         sudo apt-get install -y build-essential libssl-dev libnghttp2-dev libbrotli-dev zlib1g-dev \
@@ -41,14 +39,6 @@ jobs:
           libzstd-dev libldap2-dev
         sudo pip3 install gyp-next
         sudo ln -s /usr/bin/python3 /usr/bin/python || true
-
-    - if: matrix.container == 'fedora:latest'
-      name: Install Fedora dependencies
-      run: |
-        dnf install -y gcc-c++ make python3-pip openssl-devel nghttp2-devel brotli-devel \
-          zlib-devel ninja-build pkg-config zstd-devel openldap-devel \
-          nodejs npm
-        pip3 install gyp-next
 
     - if: runner.os == 'macOS'
       name: Install macOS system dependencies
@@ -64,19 +54,6 @@ jobs:
 
     - name: Build Native and TypeScript
       run: npm run build
-
-    - name: Bundle dependencies
-      run: |
-        mkdir -p build/lib
-        # Copy all required .so files to lib directory
-        if [ -f "/usr/lib64/libldap-2.4.so.2" ]; then
-          cp /usr/lib64/libldap-2.4.so.2 build/lib/
-          cp /usr/lib64/liblber-2.4.so.2 build/lib/
-        fi
-        if [ -f "/usr/lib/x86_64-linux-gnu/libldap-2.4.so.2" ]; then
-          cp /usr/lib/x86_64-linux-gnu/libldap-2.4.so.2 build/lib/
-          cp /usr/lib/x86_64-linux-gnu/liblber-2.4.so.2 build/lib/
-        fi
 
     - name: Build Artifact
       run: npm run package
