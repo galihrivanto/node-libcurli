@@ -1,6 +1,6 @@
 {
   "name": "@galihrivanto/node-libcurli",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Node.js bindings for curl-impersonate library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -40,7 +40,8 @@
     "example:simple": "node examples/simple.js",
     "example:curly": "node examples/curly.js",
     "example:impersonate": "node examples/impersonate.js",
-    "gen:constants": "node scripts/build-constants.js"
+    "gen:constants": "node scripts/build-constants.js",
+    "test:binary": "node -e \"require('./').version\""
   },
   "repository": {
     "type": "git",
