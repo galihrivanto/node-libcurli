@@ -1,6 +1,6 @@
 {
   "name": "@galihrivanto/node-libcurli",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Node.js bindings for curl-impersonate library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -16,6 +16,10 @@
     "./chrome": {
       "types": "./dist/chrome/index.d.ts",
       "default": "./dist/chrome/index.js"
+    },
+    "./impersonate": {
+      "types": "./dist/impersonate/index.d.ts",
+      "default": "./dist/impersonate/index.js"
     }
   },
   "files": [
@@ -23,7 +27,6 @@
     "lib/binding",
     "src",
     "binding.gyp",
-    "deps/curl-impersonate.gyp",
     "scripts"
   ],
   "scripts": {
