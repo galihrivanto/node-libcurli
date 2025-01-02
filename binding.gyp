@@ -34,9 +34,9 @@
             '<(module_root_dir)/deps/curl-impersonate/build/nss-3.92/dist/Release/include/nspr',
           ],
           'libraries': [
-            '-L<(module_root_dir)/deps/curl-impersonate/build/dist/ff/lib',
+            '-L<(deps_dir)/ff/lib',
             '-L<(module_root_dir)/deps/curl-impersonate/build/nss-3.92/dist/Release/lib',
-            '<!@(<(deps_dir)/bin/curl-impersonate-chrome-config --static-libs)',
+            '<!@(<(deps_dir)/ff/bin/curl-impersonate-ff-config --static-libs)',
           ]
         }]
       ]
@@ -66,8 +66,8 @@
             'CURL_STATICLIB',
           ],
           'libraries': [
-            '-L<(module_root_dir)/deps/curl-impersonate/build/dist/chrome/lib',
-            '<!@(<(deps_dir)/bin/curl-impersonate-chrome-config --static-libs)',
+            '-L<(deps_dir)/chrome/lib',
+            '<!@(<(deps_dir)/chrome/bin/curl-impersonate-chrome-config --static-libs)',
           ]
         }]
       ]
