@@ -34,9 +34,26 @@
             '<(module_root_dir)/deps/curl-impersonate/build/nss-3.92/dist/Release/include/nspr',
           ],
           'libraries': [
-            '-L<(deps_dir)/ff/lib',
+            '-L<(module_root_dir)/deps/curl-impersonate/build/dist/ff/lib',
             '-L<(module_root_dir)/deps/curl-impersonate/build/nss-3.92/dist/Release/lib',
-            '<!@(<(deps_dir)/ff/bin/curl-impersonate-ff-config --static-libs)',
+            '-Wl,-rpath,\'$$ORIGIN/../../deps/curl-impersonate/build/dist/ff/lib\'',
+            '-Wl,-rpath,\'$$ORIGIN/../../deps/curl-impersonate/build/nss-3.92/dist/Release/lib\'',
+            '-lcurl-impersonate-ff',
+            '-lssl3',
+            '-lsmime3',
+            '-lnss3',
+            '-lnssutil3',
+            '-lplds4',
+            '-lplc4',
+            '-lnspr4',
+            '-pthread',
+            '-ldl',
+            '-lz',
+            '-lzstd',
+            '-lbrotlidec',
+            '-lnghttp2',
+            '-lldap',
+            '-llber'
           ]
         }]
       ]
