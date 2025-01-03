@@ -919,7 +919,7 @@ class Curl extends EventEmitter {
   /**
    * Returns headers from the current stored chunks - if any
    */
-  protected getHeaders() {
+  protected getHeaders(): Buffer | HeaderInfo[] {
     const isHeaderStorageEnabled = !(
       this.features & CurlFeature.NoHeaderStorage
     )
