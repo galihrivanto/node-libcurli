@@ -51,9 +51,7 @@
             '-lz',
             '-lzstd',
             '-lbrotlidec',
-            '-lnghttp2',
-            '-lldap',
-            '-llber'
+            '-lnghttp2'
           ]
         }]
       ]

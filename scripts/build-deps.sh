@@ -26,7 +26,8 @@ export LD_LIBRARY_PATH="$BUILD_DIR/dist/lib:$LD_LIBRARY_PATH"
     --with-nss=/build/${NSS_VERSION}/dist/Release \
     --with-nss-deprecated \
     CFLAGS="-I/build/${NSS_VERSION}/dist/public/nss -I/build/${NSS_VERSION}/dist/Release/include/nspr" \
-    USE_CURL_SSLKEYLOGFILE=true && \
+    USE_CURL_SSLKEYLOGFILE=true \
+    CURL_CONFIG_FLAGS="--disable-rtsp --disable-ldap --disable-ldaps"
 
 # Build Firefox version
 echo "Building Firefox version..."
@@ -50,7 +51,8 @@ ln -sf "$BUILD_DIR/dist/ff/lib"/* "$DEPS_DIR/lib/ff/"
     --with-openssl=/build/boringssl/build \
     LIBS="-pthread" \
     CFLAGS="-I/build/boringssl/build" \
-    USE_CURL_SSLKEYLOGFILE=true
+    USE_CURL_SSLKEYLOGFILE=true \
+    CURL_CONFIG_FLAGS="--disable-rtsp --disable-ldap --disable-ldaps"
 
 # Build Chrome version
 echo "Building Chrome version..."
