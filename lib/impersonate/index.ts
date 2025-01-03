@@ -496,6 +496,7 @@ enum CurlSslOpt {
 // re-export all the types and functions from the main index.ts file
 export * from '../index';
 export { 
+    BROWSER_CONFIGS,
     Browser,
     impersonate
 };
