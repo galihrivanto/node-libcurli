@@ -274,9 +274,18 @@ export const create = (defaultOptions: CurlyOptions = {}): CurlyFunction => {
 
     curlHandle.setOpt('URL', `${options.curlyBaseUrl || ''}${url}`)
 
+    // headers should be merged not overwritten
+    const header = [
+      ...(defaultOptions.httpHeader || []),
+      ...(defaultOptions.HTTPHEADER || []),
+      ...(options.httpHeader || []),
+    ]
+
     const finalOptions = {
       ...defaultOptions,
-      ...options,
+      // remove httpHeader from options
+      ...Object.fromEntries(Object.entries(options).filter(([key]) => key !== 'httpHeader')),
+      HTTPHEADER: header,
     }
 
     for (const key of Object.keys(finalOptions)) {

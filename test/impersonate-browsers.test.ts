@@ -74,6 +74,26 @@ describe('Browser Impersonation', function () {
         });
     });
 
+    // custom cookie
+    it('should correctly impersonate with custom cookie', async () => {
+        const curly = impersonate(Browser.Firefox117);
+        const cookieValue = 'custom_cookie=value';
+        const { statusCode, data } = await curly(`http://localhost:${port}/headers`, {
+            httpHeader: ['Cookie: custom_cookie=value'],
+        });
+
+        if (statusCode !== 200) {
+            throw new Error(`Failed to make request to server: ${statusCode}`);
+        }
+
+        const receivedHeaders = data;
+
+        console.log("receivedHeaders", receivedHeaders);
+
+        // received headers should contain the custom cookie
+        expect(receivedHeaders['cookie']).to.equal(cookieValue);
+    });
+
     // Test error case
     it('should throw error for unsupported browser', () => {
         expect(() => impersonate('invalid' as Browser))

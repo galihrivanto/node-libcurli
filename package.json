@@ -3,23 +3,32 @@
   "version": "1.0.8",
   "description": "Node.js bindings for curl-impersonate library",
   "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+      "default": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
     },
     "./ff": {
       "types": "./dist/ff/index.d.ts",
-      "default": "./dist/ff/index.js"
+      "default": "./dist/ff/index.js",
+      "import": "./dist/ff/index.mjs",
+      "require": "./dist/ff/index.js"
     },
     "./chrome": {
       "types": "./dist/chrome/index.d.ts",
-      "default": "./dist/chrome/index.js"
+      "default": "./dist/chrome/index.js",
+      "import": "./dist/chrome/index.mjs",
+      "require": "./dist/chrome/index.js"
     },
     "./impersonate": {
       "types": "./dist/impersonate/index.d.ts",
-      "default": "./dist/impersonate/index.js"
+      "default": "./dist/impersonate/index.js",
+      "import": "./dist/impersonate/index.mjs",
+      "require": "./dist/impersonate/index.js"
     }
   },
   "files": [
@@ -33,7 +42,9 @@
     "install": "node-pre-gyp install --fallback-to-build",
     "postinstall": "node scripts/postinstall.js",
     "build:native": "node-pre-gyp rebuild",
-    "build:ts": "tsc",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:esm": "tsc -p tsconfig.esm.json && node scripts/rename-esm.js",
+    "build:ts": "npm run build:esm && npm run build:cjs",
     "build": "npm run build:native && npm run build:ts",
     "clean": "node-pre-gyp clean && rimraf dist",
     "package": "node scripts/package.js",

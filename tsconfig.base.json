@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "paths": { "*": ["types/external/*"] },
+      "incremental": true,
+      "target": "ES2022",
+      "lib": ["ES2022", "esnext.asynciterable"],
+      "declaration": true,
+      "declarationMap": true,
+      "strict": true,
+      "esModuleInterop": true,
+      "forceConsistentCasingInFileNames": true,
+      "rootDir": "./lib",
+      "sourceMap": true,
+      "allowSyntheticDefaultImports": true,
+      "typeRoots": ["node_modules/@types", "types/external"],
+      "noUnusedLocals": true,
+      "importHelpers": true,
+      "skipLibCheck": true
+    },
+    "include": ["lib/**/*"],
+    "exclude": ["node_modules", "**/*.test.ts"]
+  }
