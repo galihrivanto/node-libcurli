@@ -36,37 +36,64 @@ const run = async () => {
     blacklist: curlOptionsBlacklist,
   })
 
-  // Extra options for curl-impersonate
-  allowedCurlOptions.push(
+  const curlImpersonateOptions = [
+    {
+      constantOriginal: 'CURLOPT_SSL_SIG_HASH_ALGS',
+      constantName: 'SSL_SIG_HASH_ALGS',
+      constantNameCamelCase: 'sslSigHashAlgs',
+      description: '(curl-impersonate) Enable ALPN',
+      url:
+        'https://github.com/lwthiker/curl-impersonate/blob/main/chrome/patches/curl-impersonate.patch#L119',
+    },
     {
       constantOriginal: 'CURLOPT_SSL_ENABLE_ALPS',
       constantName: 'SSL_ENABLE_ALPS',
       constantNameCamelCase: 'sslEnableAlps',
-      description: 'Add for curl-impersonate',
-      url: '',
+      description: '(curl-impersonate) TLS Client hello match Extension',
+      url:
+        'https://github.com/lwthiker/curl-impersonate/blob/main/chrome/patches/curl-impersonate.patch#L119',
+    },
+    {
+      constantOriginal: 'CURLOPT_SSL_CERT_COMPRESSION',
+      constantName: 'SSL_CERT_COMPRESSION',
+      constantNameCamelCase: 'sslCompression',
+      description: '(curl-impersonate) SSL Compression type. Eg. brotli',
+      url:
+        'https://github.com/lwthiker/curl-impersonate/blob/main/chrome/patches/curl-impersonate.patch#110',
+    },
+    {
+      constantOriginal: 'CURLOPT_SSL_ENABLE_TICKET',
+      constantName: 'SSL_ENABLE_TICKET',
+      constantNameCamelCase: 'sslEnableTicket',
+      description: 'Enable/disable TLS session ticket extension (RFC5077)',
+      url: 'https://github.com/lwthiker/curl-impersonate/blob/main/chrome/patches/curl-impersonate.patch#L112',
+    },
+    {
+      constantOriginal: 'CURLOPT_HTTP2_PSEUDO_HEADERS_ORDER',
+      constantName: 'HTTP2_PSEUDO_HEADERS_ORDER',
+      constantNameCamelCase: 'http2PseudoHeadersOrder',
+      description: 'Set the order of the HTTP/2 pseudo headers',
+      url: 'https://github.com/lwthiker/curl-impersonate/blob/main/chrome/patches/curl-impersonate.patch#L124',
     },
     {
       constantOriginal: 'CURLOPT_HTTP2_NO_SERVER_PUSH',
       constantName: 'HTTP2_NO_SERVER_PUSH',
       constantNameCamelCase: 'http2NoServerPush',
-      description: 'Add for curl-impersonate',
-      url: '',
+      description: 'Disable HTTP2 server push in the HTTP2 SETTINGS',
+      url: 'https://github.com/lwthiker/curl-impersonate/blob/main/chrome/patches/curl-impersonate.patch#L128',
     },
     {
       constantOriginal: 'CURLOPT_SSL_PERMUTE_EXTENSIONS',
       constantName: 'SSL_PERMUTE_EXTENSIONS',
       constantNameCamelCase: 'sslPermuteExtensions',
-      description: 'Add for curl-impersonate',
-      url: '',
+      description: 'Enable Boringssl permute extensions',
+      url: 'https://github.com/lwthiker/curl-impersonate/blob/main/chrome/patches/curl-impersonate.patch#L132',
     },
-    {
-      constantOriginal: 'CURLOPT_SSL_CERT_COMPRESSION',
-      constantName: 'SSL_CERT_COMPRESSION',
-      constantNameCamelCase: 'sslCertCompression',
-      description: 'Add for curl-impersonate',
-      url: '',
-    },
-  )
+  ]
+
+
+  // Extra options for curl-impersonate
+  allowedCurlOptions.push(...curlImpersonateOptions)
 
   await createConstantsFile({
     constants: allowedCurlOptions,

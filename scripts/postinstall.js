@@ -34,4 +34,7 @@ function copyRecursive(source, target) {
 // Copy content from release dir to binding dir
 copyRecursive(releaseDir, targetDir);
 
+// create placeholder file to avoid re-downloading artifact
+fs.writeFileSync(path.join(targetDir, 'Release', `node-v${nodeAbi}-${platform}-${arch}`, 'libcurl.node'), '# intentional empty file');
+
 console.log('Copying content from release dir to binding dir');

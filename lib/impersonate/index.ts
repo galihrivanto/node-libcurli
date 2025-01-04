@@ -30,6 +30,8 @@ interface BrowserConfig {
     compressed?: boolean;
     http2?: boolean;
     alps?: boolean;
+    npn?: boolean;
+    alpn?: boolean;
     certCompression?: string;
     http2NoServerPush?: boolean;
     tlsPermuteExtensions?: boolean;
@@ -445,28 +447,60 @@ function impersonate(browser: Browser): CurlyFunction {
     // Create curly options object with proper curl options
     const curlyOptions: CurlyOptions = {
         // HTTP Options
-        HTTPHEADER: headersList,
-        HTTP_VERSION: config.http2 ? 2 : undefined,
-        ACCEPT_ENCODING: config.compressed ? "gzip, deflate, br" : undefined,
-
-        // TLS/SSL Options
-        SSLVERSION: parseTlsVersion(config.tlsVersion),
-        SSL_CIPHER_LIST: config.ciphers,
-        SSL_ENABLE_ALPN: config.alps,
-        SSL_ENABLE_NPN: config.alps,
-        // SSL_CERT_COMPRESSION: config.certCompression ? true : undefined,
-        // SSL_EC_CURVES: config.curves,
-        // //SSL_SIGALGS: config.signatureHashes,
-        // SSL_SESSIONID_CACHE: config.noTlsSessionTicket ? false : undefined,
-
-        // // HTTP/2 specific options
-        // //HTTP2_PSEUDO_HEADERS_ORDER: config.http2PseudoHeadersOrder,
-
-        // TLS Extension permutation
-        SSL_OPTIONS: config.tlsPermuteExtensions ? 
-            CurlSslOpt.CURLSSLOPT_ALLOW_BEAST | CurlSslOpt.CURLSSLOPT_NO_REVOKE | CurlSslOpt.CURLSSLOPT_NO_PARTIALCHAIN : 
-            undefined,
+        HTTPHEADER: headersList,        
     };
+
+    if (config.tlsVersion) {
+        curlyOptions.SSLVERSION = parseTlsVersion(config.tlsVersion);
+    }
+
+    if (config.http2) {
+        curlyOptions.HTTP_VERSION = 2;
+    }
+
+    if (config.compressed) {
+        curlyOptions.ACCEPT_ENCODING = "gzip, deflate, br";
+    }
+
+    if (config.ciphers) {
+        curlyOptions.SSL_CIPHER_LIST = config.ciphers;
+    }
+
+    if (config.alpn) {
+        curlyOptions.SSL_ENABLE_ALPN = 1;
+    }
+
+    if (config.npn) {
+        curlyOptions.SSL_ENABLE_NPN = 1;
+    }
+
+    if (config.alps) {
+        curlyOptions.SSL_ENABLE_ALPS = 1;
+    }
+
+    if (config.certCompression) {
+        curlyOptions.SSL_CERT_COMPRESSION = config.certCompression;
+    }
+
+    if (config.curves) {
+        curlyOptions.SSL_EC_CURVES = config.curves;
+    }
+
+    if (config.signatureHashes) {
+        curlyOptions.SSL_SIG_HASH_ALGS = config.signatureHashes;
+    }
+
+    if (config.noTlsSessionTicket) {
+        curlyOptions.SSL_ENABLE_TICKET = 0;
+    }
+
+    if (config.http2PseudoHeadersOrder) {
+        curlyOptions.HTTP2_PSEUDO_HEADERS_ORDER = config.http2PseudoHeadersOrder;
+    }
+
+    if (config.tlsPermuteExtensions) {
+        curlyOptions.SSL_OPTIONS = CurlSslOpt.CURLSSLOPT_ALLOW_BEAST | CurlSslOpt.CURLSSLOPT_NO_REVOKE | CurlSslOpt.CURLSSLOPT_NO_PARTIALCHAIN;
+    }
 
     const wrappedCurly = createCurly(curlyOptions);
     return wrappedCurly;

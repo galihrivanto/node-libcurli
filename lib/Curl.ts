@@ -451,6 +451,7 @@ class Curl extends EventEmitter {
     const code = this.handle.setOpt(optionIdOrName, value)
 
     if (code !== CurlCode.CURLE_OK) {
+      console.log(code, optionIdOrName, value)
       throw new Error(
         code === CurlCode.CURLE_UNKNOWN_OPTION
           ? 'Unknown option given. First argument must be the option internal id or the option name. You can use the Curl.option constants.'
@@ -1203,334 +1204,249 @@ interface Curl {
   on(event: string, listener: Function): this
 
   // START AUTOMATICALLY GENERATED CODE - DO NOT EDIT
-  /**
-   * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
-   *
-   *
-   * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
-   */
-  setOpt(
-    option: DataCallbackOptions,
-    value:
-      | ((
-          this: EasyNativeBinding,
-          data: Buffer,
-          size: number,
-          nmemb: number,
-        ) => number)
-      | null,
-  ): this
-  /**
-   * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
-   *
-   *
-   * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
-   */
-  setOpt(
-    option: ProgressCallbackOptions,
-    value:
-      | ((
-          this: EasyNativeBinding,
-          dltotal: number,
-          dlnow: number,
-          ultotal: number,
-          ulnow: number,
-        ) => number | CurlProgressFunc)
-      | null,
-  ): this
-  /**
-   * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
-   *
-   *
-   * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
-   */
-  setOpt(option: StringListOptions, value: string[] | null): this
-  /**
-   * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
-   *
-   *
-   * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
-   */
-  setOpt(option: BlobOptions, value: ArrayBuffer | Buffer | string | null): this
-  /**
-   * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
-   *
-   *
-   * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
-   */
-  setOpt(
-    option: 'CHUNK_BGN_FUNCTION',
-    value:
-      | ((
-          this: EasyNativeBinding,
-          fileInfo: FileInfo,
-          remains: number,
-        ) => CurlChunk)
-      | null,
-  ): this
-  /**
-   * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
-   *
-   *
-   * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
-   */
-  setOpt(
-    option: 'CHUNK_END_FUNCTION',
-    value: ((this: EasyNativeBinding) => CurlChunk) | null,
-  ): this
-  /**
-   * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
-   *
-   *
-   * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
-   */
-  setOpt(
-    option: 'DEBUGFUNCTION',
-    value:
-      | ((this: EasyNativeBinding, type: CurlInfoDebug, data: Buffer) => 0)
-      | null,
-  ): this
-  /**
-   * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
-   *
-   *
-   * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
-   */
-  setOpt(
-    option: 'FNMATCH_FUNCTION',
-    value:
-      | ((
-          this: EasyNativeBinding,
-          pattern: string,
-          value: string,
-        ) => CurlFnMatchFunc)
-      | null,
-  ): this
-  /**
-   * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
-   *
-   * You can either return a single `CurlHstsReadCallbackResult` object or an array of `CurlHstsReadCallbackResult` objects.
-   * If returning an array, the callback will only be called once per request.
-   * If returning a single object, the callback will be called multiple times until `null` is returned.
-   *
-   *
-   * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
-   */
-  setOpt(
-    option: 'HSTSREADFUNCTION',
-    value:
-      | ((
-          this: EasyNativeBinding,
-        ) => null | CurlHstsCacheEntry | CurlHstsCacheEntry[])
-      | null,
-  ): this
-  /**
-   * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
-   *
-   *
-   * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
-   */
-  setOpt(
-    option: 'HSTSWRITEFUNCTION',
-    value:
-      | ((
-          this: EasyNativeBinding,
-          cacheEntry: CurlHstsCacheEntry,
-          cacheCount: CurlHstsCacheCount,
-        ) => any)
-      | null,
-  ): this
-  /**
-   * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
-   *
-   *
-   * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
-   */
-  setOpt(
-    option: 'PREREQFUNCTION',
-    value:
-      | ((
-          this: EasyNativeBinding,
-          connPrimaryIp: string,
-          connLocalIp: string,
-          connPrimaryPort: number,
-          conLocalPort: number,
-        ) => CurlPreReqFunc)
-      | null,
-  ): this
-  /**
-   * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
-   *
-   *
-   * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
-   */
-  setOpt(
-    option: 'SEEKFUNCTION',
-    value:
-      | ((this: EasyNativeBinding, offset: number, origin: number) => number)
-      | null,
-  ): this
-  /**
-   * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
-   *
-   *
-   * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
-   */
-  setOpt(
-    option: 'TRAILERFUNCTION',
-    value: ((this: EasyNativeBinding) => string[] | false) | null,
-  ): this
-  /**
-   * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
-   *
-   *
-   * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
-   */
-  setOpt(option: 'SHARE', value: Share | null): this
-  /**
-   * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
-   *
-   *
-   * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
-   */
-  setOpt(option: 'HTTPPOST', value: HttpPostField[] | null): this
-  /**
-   * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
-   *
-   *
-   * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
-   */
-  setOpt(option: 'FTP_SSL_CCC', value: CurlFtpSsl | null): this
-  /**
-   * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
-   *
-   *
-   * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
-   */
-  setOpt(option: 'FTP_FILEMETHOD', value: CurlFtpMethod | null): this
-  /**
-   * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
-   *
-   *
-   * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
-   */
-  setOpt(option: 'GSSAPI_DELEGATION', value: CurlGssApi | null): this
-  /**
-   * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
-   *
-   *
-   * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
-   */
-  setOpt(option: 'HEADEROPT', value: CurlHeader | null): this
-  /**
-   * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
-   *
-   *
-   * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
-   */
-  setOpt(option: 'HTTP_VERSION', value: CurlHttpVersion | null): this
-  /**
-   * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
-   *
-   *
-   * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
-   */
-  setOpt(option: 'IPRESOLVE', value: CurlIpResolve | null): this
-  /**
-   * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
-   *
-   *
-   * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
-   */
-  setOpt(option: 'NETRC', value: CurlNetrc | null): this
-  /**
-   * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
-   *
-   *
-   * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
-   */
-  setOpt(option: 'PROTOCOLS', value: CurlProtocol | null): this
-  /**
-   * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
-   *
-   *
-   * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
-   */
-  setOpt(option: 'PROXY_SSL_OPTIONS', value: CurlSslOpt | null): this
-  /**
-   * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
-   *
-   *
-   * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
-   */
-  setOpt(option: 'PROXYTYPE', value: CurlProxy | null): this
-  /**
-   * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
-   *
-   *
-   * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
-   */
-  setOpt(option: 'REDIR_PROTOCOLS', value: CurlProtocol | null): this
-  /**
-   * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
-   *
-   *
-   * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
-   */
-  setOpt(option: 'RTSP_REQUEST', value: CurlRtspRequest | null): this
-  /**
-   * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
-   *
-   *
-   * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
-   */
-  setOpt(option: 'SSH_AUTH_TYPES', value: CurlSshAuth | null): this
-  /**
-   * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
-   *
-   *
-   * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
-   */
-  setOpt(option: 'SSL_OPTIONS', value: CurlSslOpt | null): this
-  /**
-   * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
-   *
-   *
-   * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
-   */
-  setOpt(option: 'SSLVERSION', value: CurlSslVersion | null): this
-  /**
-   * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
-   *
-   *
-   * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
-   */
-  setOpt(option: 'TIMECONDITION', value: CurlTimeCond | null): this
-  /**
-   * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
-   *
-   *
-   * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
-   */
-  setOpt(option: 'USE_SSL', value: CurlUseSsl | null): this
-  /**
-   * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
-   *
-   *
-   * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
-   */
-  setOpt(option: 'HSTS_CTRL', value: CurlHsts | null): this
-  /**
-   * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
-   *
-   *
-   * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
-   */
-  setOpt(
-    option: Exclude<CurlOptionName, SpecificOptions>,
-    value: string | number | boolean | null,
-  ): this
-  // END AUTOMATICALLY GENERATED CODE - DO NOT EDIT
+/**
+ * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
+ *
+ *
+ * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
+ */
+setOpt(option: DataCallbackOptions, value: ((this: EasyNativeBinding, data: Buffer, size: number, nmemb: number) => number) | null): this
+/**
+ * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
+ *
+ *
+ * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
+ */
+setOpt(option: ProgressCallbackOptions, value: ((this: EasyNativeBinding, dltotal: number,dlnow: number,ultotal: number,ulnow: number) => number | CurlProgressFunc) | null): this
+/**
+ * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
+ *
+ *
+ * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
+ */
+setOpt(option: StringListOptions, value: string[] | null): this
+/**
+ * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
+ *
+ *
+ * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
+ */
+setOpt(option: BlobOptions, value: ArrayBuffer | Buffer | string | null): this
+/**
+ * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
+ *
+ *
+ * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
+ */
+setOpt(option: 'CHUNK_BGN_FUNCTION', value: ((this: EasyNativeBinding, fileInfo: FileInfo, remains: number) => CurlChunk) | null): this
+/**
+ * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
+ *
+ *
+ * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
+ */
+setOpt(option: 'CHUNK_END_FUNCTION', value: ((this: EasyNativeBinding) => CurlChunk) | null): this
+/**
+ * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
+ *
+ *
+ * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
+ */
+setOpt(option: 'DEBUGFUNCTION', value: ((this: EasyNativeBinding, type: CurlInfoDebug, data: Buffer) => 0) | null): this
+/**
+ * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
+ *
+ *
+ * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
+ */
+setOpt(option: 'FNMATCH_FUNCTION', value: ((this: EasyNativeBinding, pattern: string, value: string) => CurlFnMatchFunc) | null): this
+/**
+ * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
+*
+* You can either return a single `CurlHstsReadCallbackResult` object or an array of `CurlHstsReadCallbackResult` objects.
+ * If returning an array, the callback will only be called once per request.
+ * If returning a single object, the callback will be called multiple times until `null` is returned.
+ *
+ *
+ * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
+ */
+setOpt(option: 'HSTSREADFUNCTION', value: ((this: EasyNativeBinding) => null | CurlHstsCacheEntry | CurlHstsCacheEntry[]) | null): this
+/**
+ * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
+ *
+ *
+ * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
+ */
+setOpt(option: 'HSTSWRITEFUNCTION', value: ((this: EasyNativeBinding, cacheEntry: CurlHstsCacheEntry, cacheCount: CurlHstsCacheCount) => any) | null): this
+/**
+ * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
+ *
+ *
+ * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
+ */
+setOpt(option: 'PREREQFUNCTION', value: ((this: EasyNativeBinding, connPrimaryIp: string, connLocalIp: string, connPrimaryPort: number, conLocalPort: number) => CurlPreReqFunc) | null): this
+/**
+ * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
+ *
+ *
+ * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
+ */
+setOpt(option: 'SEEKFUNCTION', value: ((this: EasyNativeBinding, offset: number, origin: number) => number) | null): this
+/**
+ * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
+ *
+ *
+ * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
+ */
+setOpt(option: 'TRAILERFUNCTION', value: ((this: EasyNativeBinding) => string[] | false) | null): this
+/**
+ * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
+ *
+ *
+ * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
+ */
+setOpt(option: 'SHARE', value: Share | null): this
+/**
+ * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
+ *
+ *
+ * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
+ */
+setOpt(option: 'HTTPPOST', value: HttpPostField[] | null): this
+/**
+ * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
+ *
+ *
+ * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
+ */
+setOpt(option: 'FTP_SSL_CCC', value: CurlFtpSsl | null): this
+/**
+ * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
+ *
+ *
+ * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
+ */
+setOpt(option: 'FTP_FILEMETHOD', value: CurlFtpMethod | null): this
+/**
+ * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
+ *
+ *
+ * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
+ */
+setOpt(option: 'GSSAPI_DELEGATION', value: CurlGssApi | null): this
+/**
+ * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
+ *
+ *
+ * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
+ */
+setOpt(option: 'HEADEROPT', value: CurlHeader | null): this
+/**
+ * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
+ *
+ *
+ * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
+ */
+setOpt(option: 'HTTP_VERSION', value: CurlHttpVersion | null): this
+/**
+ * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
+ *
+ *
+ * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
+ */
+setOpt(option: 'IPRESOLVE', value: CurlIpResolve | null): this
+/**
+ * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
+ *
+ *
+ * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
+ */
+setOpt(option: 'NETRC', value: CurlNetrc | null): this
+/**
+ * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
+ *
+ *
+ * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
+ */
+setOpt(option: 'PROTOCOLS', value: CurlProtocol | null): this
+/**
+ * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
+ *
+ *
+ * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
+ */
+setOpt(option: 'PROXY_SSL_OPTIONS', value: CurlSslOpt | null): this
+/**
+ * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
+ *
+ *
+ * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
+ */
+setOpt(option: 'PROXYTYPE', value: CurlProxy | null): this
+/**
+ * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
+ *
+ *
+ * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
+ */
+setOpt(option: 'REDIR_PROTOCOLS', value: CurlProtocol | null): this
+/**
+ * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
+ *
+ *
+ * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
+ */
+setOpt(option: 'RTSP_REQUEST', value: CurlRtspRequest | null): this
+/**
+ * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
+ *
+ *
+ * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
+ */
+setOpt(option: 'SSH_AUTH_TYPES', value: CurlSshAuth | null): this
+/**
+ * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
+ *
+ *
+ * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
+ */
+setOpt(option: 'SSL_OPTIONS', value: CurlSslOpt | null): this
+/**
+ * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
+ *
+ *
+ * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
+ */
+setOpt(option: 'SSLVERSION', value: CurlSslVersion | null): this
+/**
+ * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
+ *
+ *
+ * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
+ */
+setOpt(option: 'TIMECONDITION', value: CurlTimeCond | null): this
+/**
+ * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
+ *
+ *
+ * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
+ */
+setOpt(option: 'USE_SSL', value: CurlUseSsl | null): this
+/**
+ * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
+ *
+ *
+ * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
+ */
+setOpt(option: 'HSTS_CTRL', value: CurlHsts | null): this
+/**
+ * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
+ *
+ *
+ * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
+ */
+setOpt(option: Exclude<CurlOptionName, SpecificOptions>, value: string | number | boolean | null): this
+// END AUTOMATICALLY GENERATED CODE - DO NOT EDIT
 
   // overloaded getInfo definitions - changes made here must also be made in EasyNativeBinding.ts
   // TODO: do this automatically, like above.
