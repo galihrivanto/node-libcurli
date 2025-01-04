@@ -232,7 +232,9 @@ const std::vector<CurlConstant> curlOptionInteger = {
 
 #if NODE_LIBCURL_VER_GE(7, 56, 0)
     {"SSH_COMPRESSION", CURLOPT_SSH_COMPRESSION},
+#if CHROME_BUILD
     {"SSL_COMPRESSION", CURLOPT_SSL_CERT_COMPRESSION},
+#endif
 #endif
 
     {"SSL_OPTIONS", CURLOPT_SSL_OPTIONS},
@@ -241,7 +243,9 @@ const std::vector<CurlConstant> curlOptionInteger = {
 #if NODE_LIBCURL_VER_GE(7, 36, 0)
     {"SSL_ENABLE_ALPN", CURLOPT_SSL_ENABLE_ALPN},
     {"SSL_ENABLE_NPN", CURLOPT_SSL_ENABLE_NPN},
+#if CHROME_BUILD
     {"SSL_ENABLE_ALPS", CURLOPT_SSL_ENABLE_ALPS},
+#endif
 #endif
 
     {"SSL_SESSIONID_CACHE", CURLOPT_SSL_SESSIONID_CACHE},

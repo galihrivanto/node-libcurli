@@ -33,8 +33,7 @@ describe('Browser Impersonation', function () {
 
     // Test cases for different browsers
     [
-        Browser.Firefox117,
-        Browser.Safari15_5
+        Browser.Chrome116,
     ].forEach((browser) => {
         it(`should correctly impersonate ${browser}`, async () => {
             // Get the curly function for the browser
