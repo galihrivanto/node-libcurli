@@ -29,8 +29,8 @@
       import { CurlTimeCond } from '../enum/CurlTimeCond'
       import { CurlUseSsl } from '../enum/CurlUseSsl'
       import { EasyNativeBinding } from "../types/EasyNativeBinding"
-      import { Share } from "../Share"
-    
+      import { Share as ShareFF } from "../ff/Share"
+      import { Share as ShareChrome } from "../chrome/Share"
   
     /**
      * @public
@@ -7113,14 +7113,14 @@ serviceName?: string | number | boolean | null
  * 
  * Official libcurl documentation: : [https://curl.haxx.se/libcurl/c/CURLOPT_SHARE.html](https://curl.haxx.se/libcurl/c/CURLOPT_SHARE.html)
  */
-SHARE?: Share | null
+SHARE?: ShareFF | ShareChrome | null
 
 /**
  * Share object to use.
  * 
  * Official libcurl documentation: : [https://curl.haxx.se/libcurl/c/CURLOPT_SHARE.html](https://curl.haxx.se/libcurl/c/CURLOPT_SHARE.html)
  */
-share?: Share | null
+share?: ShareFF | ShareChrome | null
 
 /**
  * Socks5 authentication methods.

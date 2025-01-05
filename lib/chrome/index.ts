@@ -1,6 +1,5 @@
-import { setBrowser } from '../binding';
-
-setBrowser('chrome');
-
-// re-export all the types and functions from the main index.ts file
-export * from '../index';
+export { Curl } from './Curl'
+export { Easy } from './Easy'
+export { Multi } from './Multi'
+export { Share } from './Share'
+export { curly, CurlyFunction, CurlyResult } from './curly'

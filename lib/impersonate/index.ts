@@ -1,5 +1,15 @@
-import { setBrowser } from '../binding';
-import { CurlyFunction, CurlyOptions, create as createCurly } from '../curly';
+import { 
+    CurlyFunction as CurlyFunctionFF, 
+    CurlyOptions as CurlyOptionsFF, 
+    create as createCurlyFF 
+} from '../ff/curly';
+
+import {
+    CurlyFunction as CurlyFunctionChrome,
+    CurlyOptions as CurlyOptionsChrome,
+    create as createCurlyChrome
+} from '../chrome/curly';
+import { CurlSslVersion } from '../enum/CurlSslVersion';
 
 enum Browser {
     Chrome99 = 'chrome99',
@@ -433,19 +443,17 @@ const BROWSER_CONFIGS: Record<Browser, BrowserConfig> = {
     }
 };
 
-function impersonate(browser: Browser): CurlyFunction {
+function impersonate(browser: Browser): CurlyFunctionFF | CurlyFunctionChrome {
     const config = BROWSER_CONFIGS[browser];
     if (!config) {
         throw new Error(`Unsupported browser: ${browser}`);
     }
 
-    setBrowser(browser.toLowerCase().includes('ff') ? 'ff' : 'chrome');
-
     // Convert headers to proper format for curl
     const headersList = Object.entries(config.headers).map(([key, value]) => `${key}: ${value}`);
 
     // Create curly options object with proper curl options
-    const curlyOptions: CurlyOptions = {
+    const curlyOptions: CurlyOptionsFF | CurlyOptionsChrome = {
         // HTTP Options
         HTTPHEADER: headersList,        
     };
@@ -501,20 +509,42 @@ function impersonate(browser: Browser): CurlyFunction {
     if (config.tlsPermuteExtensions) {
         curlyOptions.SSL_OPTIONS = CurlSslOpt.CURLSSLOPT_ALLOW_BEAST | CurlSslOpt.CURLSSLOPT_NO_REVOKE | CurlSslOpt.CURLSSLOPT_NO_PARTIALCHAIN;
     }
-
-    const wrappedCurly = createCurly(curlyOptions);
-    return wrappedCurly;
+    
+    switch (browser) {
+        case Browser.Firefox117:
+        case Browser.Firefox109:
+        case Browser.Firefox102:
+        case Browser.Firefox98:
+        case Browser.Firefox95:
+        case Browser.Firefox91ESR:
+            return createCurlyFF(curlyOptions);
+        case Browser.Chrome99:
+        case Browser.Chrome99_Android:
+        case Browser.Chrome100:
+        case Browser.Chrome101:
+        case Browser.Chrome104:
+        case Browser.Chrome107:
+        case Browser.Chrome110:
+        case Browser.Chrome116:
+        case Browser.Edge99:
+        case Browser.Edge101:
+        case Browser.Safari15_3:
+        case Browser.Safari15_5:
+            return createCurlyChrome(curlyOptions);
+        default:
+            throw new Error(`Unsupported browser: ${browser}`);
+    }
 }
 
 // Helper function to parse TLS version string to curl constants
-function parseTlsVersion(version: string | undefined): number | undefined {
-    if (!version) return undefined;
+function parseTlsVersion(version: string | undefined): CurlSslVersion | undefined {
+    if (!version) return CurlSslVersion.Default;
     
     const versionMap: Record<string, number> = {
-        '1.0': 1, // CURL_SSLVERSION_TLSv1_0
-        '1.1': 2, // CURL_SSLVERSION_TLSv1_1
-        '1.2': 3, // CURL_SSLVERSION_TLSv1_2
-        '1.3': 4, // CURL_SSLVERSION_TLSv1_3
+        '1.0': CurlSslVersion.TlsV1_0,
+        '1.1': CurlSslVersion.TlsV1_1,
+        '1.2': CurlSslVersion.TlsV1_2,
+        '1.3': CurlSslVersion.TlsV1_3
     };
 
     return versionMap[version];

@@ -10,12 +10,12 @@ import {
   CurlOptionName,
   CurlOptionCamelCaseMap,
   CurlOptionValueType,
-} from './generated/CurlOption'
+} from '../generated/CurlOption'
 
-import { HeaderInfo } from './parseHeaders'
+import { HeaderInfo } from '../util/parseHeaders'
 
 import { Curl } from './Curl'
-import { CurlFeature } from './enum/CurlFeature'
+import { CurlFeature } from '../enum/CurlFeature'
 
 /**
  * Object the curly call resolves to.
