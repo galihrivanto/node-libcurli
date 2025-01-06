@@ -69,7 +69,7 @@ import { CurlReadFunc } from '../enum/CurlReadFunc'
 import { CurlInfoNameSpecific, GetInfoReturn } from '../types/EasyNativeBinding'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const bindings: NodeLibcurlNativeBinding = require('../binding/ff/node_libcurl.node')
+const bindings: NodeLibcurlNativeBinding = require('../../lib/binding/ff/node_libcurl.node')
 
 const { Curl: _Curl, CurlVersionInfo } = bindings
 

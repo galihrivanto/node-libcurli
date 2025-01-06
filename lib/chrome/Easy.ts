@@ -7,7 +7,7 @@
 import { NodeLibcurlNativeBinding } from '../types/NodeLibcurlNativeBinding'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const bindings: NodeLibcurlNativeBinding = require('../binding/chrome/node_libcurl.node')
+const bindings: NodeLibcurlNativeBinding = require('../../lib/binding/chrome/node_libcurl.node')
 
 /**
  * This is a Node.js wrapper around the binding {@link EasyNativeBinding | native Easy class}

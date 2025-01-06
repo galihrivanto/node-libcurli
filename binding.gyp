@@ -30,8 +30,22 @@
             'CURL_STATICLIB',
           ],
           'libraries': [
-            '-L<(deps_dir)/ff/lib',
-            '<!@(<(deps_dir)/bin/curl-impersonate-ff-config --static-libs)',
+            '-L<(deps_dir)/ff/lib',           
+            '-Wl,-rpath,\'$$ORIGIN/../../deps/curl-impersonate/build/ff/lib\'',            
+            '-lcurl-impersonate-ff',
+            '-lssl3',
+            '-lsmime3',
+            '-lnss3',
+            '-lnssutil3',
+            '-lplds4',
+            '-lplc4',
+            '-lnspr4',
+            '-pthread',
+            '-ldl',
+            '-lz',
+            '-lzstd',
+            '-lbrotlidec',
+            '-lnghttp2'
           ]
         }]
       ]

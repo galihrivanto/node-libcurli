@@ -6,6 +6,7 @@ yarn.lock
 # Build
 build/
 dist/
+dist-temp/
 
 # Node-gyp
 build/
