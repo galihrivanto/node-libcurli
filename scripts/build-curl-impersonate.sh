@@ -154,9 +154,9 @@ build_chrome() {
 
     # copy curl include dir
     mkdir -p $INSTALL_DIR/chrome
-    mv -r $INSTALL_DIR/bin $INSTALL_DIR/chrome/bin
-    mv -r $INSTALL_DIR/lib $INSTALL_DIR/chrome/lib
-    mv -r $INSTALL_DIR/$CURL_VERSION/include $INSTALL_DIR/chrome/include
+    cp -r $INSTALL_DIR/bin $INSTALL_DIR/chrome/bin
+    cp -r $INSTALL_DIR/lib $INSTALL_DIR/chrome/lib
+    cp -r $INSTALL_DIR/$CURL_VERSION/include $INSTALL_DIR/chrome/include
 }
 
 # Build Firefox version
@@ -169,9 +169,9 @@ build_firefox() {
 
     # copy curl include dir
     mkdir -p $INSTALL_DIR/ff
-    mv -r $INSTALL_DIR/bin $INSTALL_DIR/ff/bin
-    mv -r $INSTALL_DIR/lib $INSTALL_DIR/ff/lib
-    mv -r $INSTALL_DIR/$CURL_VERSION/include $INSTALL_DIR/ff/include
+    cp -r $INSTALL_DIR/bin $INSTALL_DIR/ff/bin
+    cp -r $INSTALL_DIR/lib $INSTALL_DIR/ff/lib
+    cp -r $INSTALL_DIR/$CURL_VERSION/include $INSTALL_DIR/ff/include
 }
 
 # Clean cache
