@@ -1,7 +1,7 @@
 {
   'variables': {
     'module_name': 'node_libcurl',
-    'deps_dir': '<(module_root_dir)/deps/curl-impersonate/build/dist',
+    'deps_dir': '<(module_root_dir)/deps/curl-impersonate/build',
     'binary_root_dir': '<(module_path)'
   },
   'targets': [
@@ -22,22 +22,16 @@
       ],
       'include_dirs': [
         "<!(node -e \"require('nan')\")", 
-        "<(module_root_dir)/deps/curl-impersonate/build/curl-8.1.1/include"
+        "<(module_root_dir)/deps/curl-impersonate/build/ff/include"
       ],
       'conditions': [
         ['OS=="linux"', {
           'defines': [
-            'CURL_STATICLIB'
-          ],
-          'include_dirs': [
-            '<(module_root_dir)/deps/curl-impersonate/build/nss-3.92/dist/Release/include/nss',
-            '<(module_root_dir)/deps/curl-impersonate/build/nss-3.92/dist/Release/include/nspr',
+            'CURL_STATICLIB',
           ],
           'libraries': [
-            '-L<(module_root_dir)/deps/curl-impersonate/build/dist/ff/lib',
-            '-L<(module_root_dir)/deps/curl-impersonate/build/nss-3.92/dist/Release/lib',
-            '-Wl,-rpath,\'$$ORIGIN/../../deps/curl-impersonate/build/dist/ff/lib\'',
-            '-Wl,-rpath,\'$$ORIGIN/../../deps/curl-impersonate/build/nss-3.92/dist/Release/lib\'',
+            '-L<(deps_dir)/ff/lib',           
+            '-Wl,-rpath,\'$$ORIGIN/../../deps/curl-impersonate/build/ff/lib\'',            
             '-lcurl-impersonate-ff',
             '-lssl3',
             '-lsmime3',
@@ -73,16 +67,17 @@
       ],
       'include_dirs': [
         "<!(node -e \"require('nan')\")", 
-        "<(module_root_dir)/deps/curl-impersonate/build/curl-8.1.1/include"
+        "<(module_root_dir)/deps/curl-impersonate/build/chrome/include"
       ],
       'conditions': [
         ['OS=="linux"', {
           'defines': [
             'CURL_STATICLIB',
+            'CHROME_BUILD',
           ],
           'libraries': [
             '-L<(deps_dir)/chrome/lib',
-            '<!@(<(deps_dir)/chrome/bin/curl-impersonate-chrome-config --static-libs)',
+            '<!@(<(deps_dir)/bin/curl-impersonate-chrome-config --static-libs)',
           ]
         }]
       ]

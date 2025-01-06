@@ -10,20 +10,20 @@ import assert from 'assert'
 import { Readable } from 'stream'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const pkg = require('../package.json')
+const pkg = require('../../package.json')
 
 import {
   NodeLibcurlNativeBinding,
   EasyNativeBinding,
   FileInfo,
   HttpPostField,
-} from './types'
+} from '../types'
 
 import { Easy } from './Easy'
 import { Multi } from './Multi'
 import { Share } from './Share'
-import { mergeChunks } from './mergeChunks'
-import { parseHeaders, HeaderInfo } from './parseHeaders'
+import { mergeChunks } from '../util/mergeChunks'
+import { parseHeaders, HeaderInfo } from '../util/parseHeaders'
 import {
   DataCallbackOptions,
   ProgressCallbackOptions,
@@ -32,45 +32,44 @@ import {
   CurlOptionName,
   SpecificOptions,
   CurlOptionValueType,
-} from './generated/CurlOption'
-import { CurlInfoName } from './generated/CurlInfo'
+} from '../generated/CurlOption'
+import { CurlInfoName } from '../generated/CurlInfo'
 
-import { CurlChunk } from './enum/CurlChunk'
-import { CurlCode } from './enum/CurlCode'
-import { CurlFeature } from './enum/CurlFeature'
-import { CurlFnMatchFunc } from './enum/CurlFnMatchFunc'
-import { CurlFtpMethod } from './enum/CurlFtpMethod'
-import { CurlFtpSsl } from './enum/CurlFtpSsl'
-import { CurlGlobalInit } from './enum/CurlGlobalInit'
-import { CurlGssApi } from './enum/CurlGssApi'
-import { CurlHeader } from './enum/CurlHeader'
+import { CurlChunk } from '../enum/CurlChunk'
+import { CurlCode } from '../enum/CurlCode'
+import { CurlFeature } from '../enum/CurlFeature'
+import { CurlFnMatchFunc } from '../enum/CurlFnMatchFunc'
+import { CurlFtpMethod } from '../enum/CurlFtpMethod'
+import { CurlFtpSsl } from '../enum/CurlFtpSsl'
+import { CurlGlobalInit } from '../enum/CurlGlobalInit'
+import { CurlGssApi } from '../enum/CurlGssApi'
+import { CurlHeader } from '../enum/CurlHeader'
 import {
   CurlHsts,
   CurlHstsCacheEntry,
   CurlHstsCacheCount,
-} from './enum/CurlHsts'
-import { CurlHttpVersion } from './enum/CurlHttpVersion'
-import { CurlInfoDebug } from './enum/CurlInfoDebug'
-import { CurlIpResolve } from './enum/CurlIpResolve'
-import { CurlNetrc } from './enum/CurlNetrc'
-import { CurlPause } from './enum/CurlPause'
-import { CurlPreReqFunc } from './enum/CurlPreReqFunc'
-import { CurlProgressFunc } from './enum/CurlProgressFunc'
-import { CurlProtocol } from './enum/CurlProtocol'
-import { CurlProxy } from './enum/CurlProxy'
-import { CurlRtspRequest } from './enum/CurlRtspRequest'
-import { CurlSshAuth } from './enum/CurlSshAuth'
-import { CurlSslOpt } from './enum/CurlSslOpt'
-import { CurlSslVersion } from './enum/CurlSslVersion'
-import { CurlTimeCond } from './enum/CurlTimeCond'
-import { CurlUseSsl } from './enum/CurlUseSsl'
-import { CurlWriteFunc } from './enum/CurlWriteFunc'
-import { CurlReadFunc } from './enum/CurlReadFunc'
-import { CurlInfoNameSpecific, GetInfoReturn } from './types/EasyNativeBinding'
-import { getBindings } from './binding'
+} from '../enum/CurlHsts'
+import { CurlHttpVersion } from '../enum/CurlHttpVersion'
+import { CurlInfoDebug } from '../enum/CurlInfoDebug'
+import { CurlIpResolve } from '../enum/CurlIpResolve'
+import { CurlNetrc } from '../enum/CurlNetrc'
+import { CurlPause } from '../enum/CurlPause'
+import { CurlPreReqFunc } from '../enum/CurlPreReqFunc'
+import { CurlProgressFunc } from '../enum/CurlProgressFunc'
+import { CurlProtocol } from '../enum/CurlProtocol'
+import { CurlProxy } from '../enum/CurlProxy'
+import { CurlRtspRequest } from '../enum/CurlRtspRequest'
+import { CurlSshAuth } from '../enum/CurlSshAuth'
+import { CurlSslOpt } from '../enum/CurlSslOpt'
+import { CurlSslVersion } from '../enum/CurlSslVersion'
+import { CurlTimeCond } from '../enum/CurlTimeCond'
+import { CurlUseSsl } from '../enum/CurlUseSsl'
+import { CurlWriteFunc } from '../enum/CurlWriteFunc'
+import { CurlReadFunc } from '../enum/CurlReadFunc'
+import { CurlInfoNameSpecific, GetInfoReturn } from '../types/EasyNativeBinding'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const bindings: NodeLibcurlNativeBinding = getBindings()
+const bindings: NodeLibcurlNativeBinding = require('../../lib/binding/ff/node_libcurl.node')
 
 const { Curl: _Curl, CurlVersionInfo } = bindings
 

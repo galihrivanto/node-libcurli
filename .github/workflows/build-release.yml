@@ -46,7 +46,7 @@ jobs:
 
     - name: Build curl-impersonate
       run: |
-        ./scripts/build-deps.sh
+        ./scripts/build-curl-impersonate.sh
 
     - name: Install dependencies
       run: |

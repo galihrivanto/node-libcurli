@@ -1,7 +1,10 @@
 {
     "compilerOptions": {
       "baseUrl": ".",
-      "paths": { "*": ["types/external/*"] },
+      "paths": {
+        "@/*": ["lib/*"],
+        "*": ["types/external/*"] 
+      },
       "incremental": true,
       "target": "ES2022",
       "lib": ["ES2022", "esnext.asynciterable"],
@@ -16,7 +19,7 @@
       "typeRoots": ["node_modules/@types", "types/external"],
       "noUnusedLocals": true,
       "importHelpers": true,
-      "skipLibCheck": true
+      "skipLibCheck": true,
     },
     "include": ["lib/**/*"],
     "exclude": ["node_modules", "**/*.test.ts"]

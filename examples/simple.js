@@ -1,4 +1,4 @@
-const { Curl } = require('../dist/index.js');
+const { Curl } = require('../dist/chrome/Curl.js');
 const path = require('path');
 
 // Set NSS environment variables

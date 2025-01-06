@@ -4,7 +4,9 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { Share } from '../Share'
+import { Share as ShareFF } from '../ff/Share'
+import { Share as ShareChrome } from '../chrome/Share'
+
 import {
   CurlOptionName,
   DataCallbackOptions,
@@ -217,7 +219,7 @@ setOpt(option: 'TRAILERFUNCTION', value: ((this: EasyNativeBinding) => string[] 
  *
  * Official libcurl documentation: [`curl_easy_setopt()`](http://curl.haxx.se/libcurl/c/curl_easy_setopt.html)
  */
-setOpt(option: 'SHARE', value: Share | null): CurlCode
+setOpt(option: 'SHARE', value: ShareFF | ShareChrome | null): CurlCode
 /**
  * Use {@link "Curl".Curl.option|`Curl.option`} for predefined constants.
  *

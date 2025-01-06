@@ -8,11 +8,17 @@
  * node-libcurl
  * @packageDocumentation
  */
-export { Curl } from './Curl'
-export { Easy } from './Easy'
-export { Multi } from './Multi'
-export { Share } from './Share'
-export { curly, CurlyFunction, CurlyResult } from './curly'
+export { Curl as CurlFF } from './ff/Curl'
+export { Easy as EasyFF } from './ff/Easy'
+export { Multi as MultiFF } from './ff/Multi'
+export { Share as ShareFF } from './ff/Share'
+export { curly as curlyFF, CurlyFunction as CurlyFunctionFF, CurlyResult as CurlyResultFF } from './ff/curly'
+
+export { Curl as CurlChrome } from './chrome/Curl'
+export { Easy as EasyChrome } from './chrome/Easy'
+export { Multi as MultiChrome } from './chrome/Multi'
+export { Share as ShareChrome } from './chrome/Share'
+export { curly as curlyChrome, CurlyFunction as CurlyFunctionChrome, CurlyResult as CurlyResultChrome } from './chrome/curly'
 
 // enums
 export * from './enum/CurlAuth'
@@ -53,7 +59,7 @@ export * from './enum/SocketState'
 
 // types that can be helpful for library consumer
 
-export { HeaderInfo } from './parseHeaders'
+export { HeaderInfo } from './util/parseHeaders'
 export { CurlInfo, CurlInfoName } from './generated/CurlInfo'
 export {
   CurlOption,
