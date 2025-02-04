@@ -2,9 +2,13 @@ const fs = require('fs');
 const path = require('path');
 
 function renameToMjs(srcDir, destDir) {
-  const files = fs.readdirSync(srcDir);
-  
-  files.forEach(file => {
+    if (!fs.existsSync(srcDir)) {
+        return;
+    }
+
+    const files = fs.readdirSync(srcDir);
+    
+    files.forEach(file => {
     const filePath = path.join(srcDir, file);
     const stat = fs.statSync(filePath);
     
@@ -17,7 +21,7 @@ function renameToMjs(srcDir, destDir) {
     }
   });
 
-  fs.rmdirSync(srcDir, { recursive: true });
+  fs.rmSync(srcDir, { recursive: true });
 }
 
 renameToMjs('./dist-temp', './dist');

@@ -467,6 +467,13 @@ const std::vector<CurlConstant> curlOptionString = {
 #if NODE_LIBCURL_VER_GE(7, 33, 0)
     {"XOAUTH2_BEARER", CURLOPT_XOAUTH2_BEARER},
 #endif
+
+#if CHROME_BUILD
+    {"SSL_SIG_HASH_ALGS", CURLOPT_SSL_SIG_HASH_ALGS},
+    {"SSL_ENABLE_ALPS", CURLOPT_SSL_ENABLE_ALPS},
+    {"SSL_ENABLE_TICKET", CURLOPT_SSL_ENABLE_TICKET},
+    {"HTTP2_PSEUDO_HEADERS_ORDER", CURLOPT_HTTP2_PSEUDO_HEADERS_ORDER},
+#endif
 };
 
 const std::vector<CurlConstant> curlOptionFunction = {

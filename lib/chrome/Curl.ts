@@ -17,7 +17,7 @@ import {
   EasyNativeBinding,
   FileInfo,
   HttpPostField,
-} from '../types'
+} from '../types/index'
 
 import { Easy } from './Easy'
 import { Multi } from './Multi'

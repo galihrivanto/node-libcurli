@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": { "*": ["types/external/*"] },
+    "paths": { 
+      "*": ["types/external/*"],
+      "@galihrivanto/dict": ["node_modules/@galihrivanto/dict/dist/dict"]
+    },
     "incremental": true,
     "target": "ES2022",
     "lib": ["ES2022", "esnext.asynciterable"],

@@ -1,15 +1,16 @@
 import { 
-    CurlyFunction as CurlyFunctionFF, 
-    CurlyOptions as CurlyOptionsFF, 
     create as createCurlyFF 
 } from '../ff/curly';
+import { 
+    CurlyOptions,
+    CurlyFunction
+} from '../shared/curly'
 
 import {
-    CurlyFunction as CurlyFunctionChrome,
-    CurlyOptions as CurlyOptionsChrome,
     create as createCurlyChrome
 } from '../chrome/curly';
 import { CurlSslVersion } from '../enum/CurlSslVersion';
+import { CurlHttpVersion } from '../enum/CurlHttpVersion';
 
 enum Browser {
     Chrome99 = 'chrome99',
@@ -443,7 +444,7 @@ const BROWSER_CONFIGS: Record<Browser, BrowserConfig> = {
     }
 };
 
-function impersonate(browser: Browser): CurlyFunctionFF | CurlyFunctionChrome {
+function impersonate(browser: Browser): CurlyFunction {
     const config = BROWSER_CONFIGS[browser];
     if (!config) {
         throw new Error(`Unsupported browser: ${browser}`);
@@ -453,7 +454,7 @@ function impersonate(browser: Browser): CurlyFunctionFF | CurlyFunctionChrome {
     const headersList = Object.entries(config.headers).map(([key, value]) => `${key}: ${value}`);
 
     // Create curly options object with proper curl options
-    const curlyOptions: CurlyOptionsFF | CurlyOptionsChrome = {
+    const curlyOptions: CurlyOptions = {
         // HTTP Options
         HTTPHEADER: headersList,        
     };
@@ -463,7 +464,7 @@ function impersonate(browser: Browser): CurlyFunctionFF | CurlyFunctionChrome {
     }
 
     if (config.http2) {
-        curlyOptions.HTTP_VERSION = 2;
+        curlyOptions.HTTP_VERSION = CurlHttpVersion.V2_0;
     }
 
     if (config.compressed) {
@@ -487,7 +488,7 @@ function impersonate(browser: Browser): CurlyFunctionFF | CurlyFunctionChrome {
     }
 
     if (config.certCompression) {
-        curlyOptions.SSL_CERT_COMPRESSION = config.certCompression;
+        curlyOptions.SSL_COMPRESSION = config.certCompression;
     }
 
     if (config.curves) {
@@ -530,6 +531,7 @@ function impersonate(browser: Browser): CurlyFunctionFF | CurlyFunctionChrome {
         case Browser.Edge101:
         case Browser.Safari15_3:
         case Browser.Safari15_5:
+            console.log('create curly chrome')
             return createCurlyChrome(curlyOptions);
         default:
             throw new Error(`Unsupported browser: ${browser}`);

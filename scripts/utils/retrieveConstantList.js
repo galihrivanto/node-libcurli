@@ -1,6 +1,6 @@
 const cheerio = require('cheerio')
 
-const { curly } = require('../../dist')
+const { curly } = require('../../dist/ff')
 const { optionExtraDescriptionValueMap } = require('../data/options')
 
 const {

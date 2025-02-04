@@ -8,17 +8,18 @@
  * node-libcurl
  * @packageDocumentation
  */
+export { CurlyFunction, CurlyResult } from './shared/curly'
 export { Curl as CurlFF } from './ff/Curl'
 export { Easy as EasyFF } from './ff/Easy'
 export { Multi as MultiFF } from './ff/Multi'
 export { Share as ShareFF } from './ff/Share'
-export { curly as curlyFF, CurlyFunction as CurlyFunctionFF, CurlyResult as CurlyResultFF } from './ff/curly'
+export { curly as curlyFF } from './ff/curly'
 
 export { Curl as CurlChrome } from './chrome/Curl'
 export { Easy as EasyChrome } from './chrome/Easy'
 export { Multi as MultiChrome } from './chrome/Multi'
 export { Share as ShareChrome } from './chrome/Share'
-export { curly as curlyChrome, CurlyFunction as CurlyFunctionChrome, CurlyResult as CurlyResultChrome } from './chrome/curly'
+export { curly as curlyChrome } from './chrome/curly'
 
 // enums
 export * from './enum/CurlAuth'

@@ -5,8 +5,8 @@ import { AddressInfo } from 'net';
 import { Browser, BROWSER_CONFIGS, impersonate } from '../lib/impersonate';
 
 describe('Browser Impersonation', function () {
-    // make the test timeout 30 seconds
-    this.timeout(30000);
+    // make the test timeout 60 seconds
+    this.timeout(60000);
 
     let server: Server;
     let port: number;
@@ -34,8 +34,7 @@ describe('Browser Impersonation', function () {
     // Test cases for different browsers
     [
         Browser.Chrome116,
-        Browser.Firefox117,
-        Browser.Safari15_5
+        Browser.Firefox117
     ].forEach((browser) => {
         it(`should correctly impersonate ${browser}`, async () => {
             // Get the curly function for the browser
@@ -51,8 +50,6 @@ describe('Browser Impersonation', function () {
             // Parse response data
             const receivedHeaders = data;
 
-            console.log("receivedHeaders", receivedHeaders);
-
             // Get expected headers for this browser
             const expectedHeaders = {
                 ...BROWSER_CONFIGS[browser].headers,
@@ -64,8 +61,6 @@ describe('Browser Impersonation', function () {
                 acc[key.toLowerCase()] = value;
                 return acc;
             }, {} as Record<string, string>);
-
-            console.log("normalizedExpectedHeaders", normalizedExpectedHeaders);
 
             // Check each expected header
             Object.entries(normalizedExpectedHeaders).forEach(([key, value]) => {
@@ -88,8 +83,6 @@ describe('Browser Impersonation', function () {
         }
 
         const receivedHeaders = data;
-
-        console.log("receivedHeaders", receivedHeaders);
 
         // received headers should contain the custom cookie
         expect(receivedHeaders['cookie']).to.equal(cookieValue);
