@@ -1,10 +1,10 @@
 const { impersonate, Browser } = require('../dist/impersonate');
 
 async function main() {
-    const ffCurly = impersonate(Browser.Firefox117);
+    const browser = impersonate(Browser.Firefox117);
 
-    const result = await ffCurly('https://www.google.com');
-    console.log(result);
+    const page = await browser.get("https://tls.browserleaks.com/json");
+    console.log(page);
 }
 
 main();

@@ -450,7 +450,6 @@ class Curl extends EventEmitter {
     const code = this.handle.setOpt(optionIdOrName, value)
 
     if (code !== CurlCode.CURLE_OK) {
-      console.log(code, optionIdOrName, value)
       throw new Error(
         code === CurlCode.CURLE_UNKNOWN_OPTION
           ? 'Unknown option given. First argument must be the option internal id or the option name. You can use the Curl.option constants.'

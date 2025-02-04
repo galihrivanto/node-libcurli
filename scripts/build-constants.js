@@ -55,7 +55,7 @@ const run = async () => {
     },
     {
       constantOriginal: 'CURLOPT_SSL_CERT_COMPRESSION',
-      constantName: 'SSL_CERT_COMPRESSION',
+      constantName: 'SSL_COMPRESSION',
       constantNameCamelCase: 'sslCompression',
       description: '(curl-impersonate) SSL Compression type. Eg. brotli',
       url:
@@ -214,13 +214,18 @@ const run = async () => {
     __dirname,
     '../lib/types/EasyNativeBinding.ts',
   )
-  const curlClassFilePath = path.resolve(__dirname, '../lib/Curl.ts')
+  const curlClassFilePaths = [
+    path.resolve(__dirname, '../lib/ff/Curl.ts'),
+    path.resolve(__dirname, '../lib/chrome/Curl.ts')
+  ]
 
   createSetOptOverloads(easyBindingFilePath)
-  createSetOptOverloads(curlClassFilePath, 'this')
+  curlClassFilePaths.forEach((classPath) => {
+    createSetOptOverloads(classPath, 'this')
+  })
 
   execSync(
-    `yarn prettier ${curlOptionsFilePath} ${curlInfoFilePath} ${multiOptionFilePath} ${easyBindingFilePath} ${curlClassFilePath}`,
+    `yarn prettier ${curlOptionsFilePath} ${curlInfoFilePath} ${multiOptionFilePath} ${easyBindingFilePath} ${curlClassFilePaths.join(' ')}`,
   )
 }
 

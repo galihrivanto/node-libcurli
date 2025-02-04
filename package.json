@@ -51,9 +51,10 @@
     "example:simple": "node examples/simple.js",
     "example:curly": "node examples/curly.js",
     "example:impersonate": "node examples/impersonate.js",
+    "example:check": "node examples/check.js",
     "gen:constants": "node scripts/build-constants.js",
     "test:binary": "node -e \"require('./').version\"",
-    "test": "mocha -r ts-node/register 'test/**/*.test.ts'"
+    "test": "mocha -r ts-node/register 'test/**/*.test.ts' 2>&1"
   },
   "repository": {
     "type": "git",
@@ -74,6 +75,7 @@
   },
   "homepage": "https://github.com/galihrivanto/node-libcurli#readme",
   "dependencies": {
+    "@galihrivanto/dict": "^1.0.0",
     "@mapbox/node-pre-gyp": "^1.0.0",
     "nan": "^2.22.0",
     "node-addon-api": "^7.0.0",
