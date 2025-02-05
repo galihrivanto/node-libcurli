@@ -10,7 +10,7 @@ This original library is from [JCMais/node-libcurl](https://github.com/JCMais/no
 npm install @galihrivanto/node-libcurli
 ```
 
-## Prerequisites
+## Prerequisites (Development)
 ### Ubuntu
 
 Install dependencies for building all the components:
@@ -53,23 +53,11 @@ You may need to follow the [Go installation instructions](https://go.dev/doc/ins
 yum install golang
 ```
 
-### macOS
-
-Install dependencies for building all the components:
-
-```sh
-brew install pkg-config make cmake ninja autoconf automake libtool
-# For the Firefox version only
-brew install sqlite nss
-pip3 install gyp-next
-# For the Chrome version only
-brew install go
-```
 
 ## Build
 ### Setup dependency (curl-impersonate)
 ```bash
-./scripts/build-deps.sh
+./scripts/build-curl-impersonate.sh
 ```
 
 ### Build / Install
@@ -80,9 +68,10 @@ npm install
 
 ### examples
 ```bash
-npm run example:simple
-npm run example:curly
-npm run example:impersonate
+node examples/check.js
+node examples/impersonate.js
+node examples/chrome.js
+node examples/safari.js
 ```
 
 ## Usage
