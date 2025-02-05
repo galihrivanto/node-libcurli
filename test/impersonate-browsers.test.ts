@@ -3,10 +3,11 @@ import express from 'express';
 import { Server } from 'http';
 import { AddressInfo } from 'net';
 import { Browser, BROWSER_CONFIGS, impersonate } from '../lib/impersonate';
+import { create as createBinaryBrowser } from '../lib/util/binaryBrowser'
 
 describe('Browser Impersonation', function () {
-    // make the test timeout 60 seconds
-    this.timeout(60000);
+    // make the test timeout 30 seconds
+    this.timeout(30000);
 
     let server: Server;
     let port: number;
@@ -94,3 +95,27 @@ describe('Browser Impersonation', function () {
             .to.throw('Unsupported browser: invalid');
     });
 });
+
+describe('Comparison with binary version', function(){
+    // extend timeout
+    this.timeout(60000);
+
+    [
+        Browser.Chrome116,
+        Browser.Firefox117,
+        Browser.Safari15_5
+    ].forEach((browserName) => {
+        it(`should match response with binary browser ${browserName}`, async function() {
+            const binBrowser = createBinaryBrowser(browserName);
+            const browser = impersonate(browserName);
+
+            const [binPage, page] = await Promise.all([
+                binBrowser.get('https://tls.browserleaks.com/json'),
+                browser.get('https://tls.browserleaks.com/json')
+            ]);
+
+            expect(binPage.data).to.deep.equal(page.data);         
+
+        }) 
+    })
+})

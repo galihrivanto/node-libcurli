@@ -1,6 +1,6 @@
 {
   "name": "@galihrivanto/node-libcurli",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Node.js bindings for curl-impersonate library",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -47,11 +47,8 @@
     "build:ts": "npm run build:esm && npm run build:cjs",
     "build": "npm run build:native && npm run build:ts",
     "clean": "node-pre-gyp clean && rimraf dist",
+    "rebuild": "node-pre-gyp rebuild --debug",
     "package": "node scripts/package.js",
-    "example:simple": "node examples/simple.js",
-    "example:curly": "node examples/curly.js",
-    "example:impersonate": "node examples/impersonate.js",
-    "example:check": "node examples/check.js",
     "gen:constants": "node scripts/build-constants.js",
     "test:binary": "node -e \"require('./').version\"",
     "test": "mocha -r ts-node/register 'test/**/*.test.ts' 2>&1"

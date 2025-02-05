@@ -531,7 +531,6 @@ function impersonate(browser: Browser): CurlyFunction {
         case Browser.Edge101:
         case Browser.Safari15_3:
         case Browser.Safari15_5:
-            console.log('create curly chrome')
             return createCurlyChrome(curlyOptions);
         default:
             throw new Error(`Unsupported browser: ${browser}`);
