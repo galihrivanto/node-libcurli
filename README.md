@@ -10,10 +10,21 @@ This original library is from [JCMais/node-libcurl](https://github.com/JCMais/no
 npm install @galihrivanto/node-libcurli
 ```
 
-## Prerequisites (Development)
-### Ubuntu
+## Development
 
-Install dependencies for building all the components:
+### Clone repository
+```bash
+git clone https://github.com/galihrivanto/node-libcurli.git
+```
+
+### Fetch submodules
+```bash
+git submodule update --init --recursive
+```
+
+### Ubuntu Prerequisites
+
+Install dependencies:
 
 ```sh
 sudo apt install build-essential pkg-config cmake ninja-build curl autoconf automake libtool
@@ -25,7 +36,7 @@ export PATH="$PATH:~/.local/bin" # Add gyp to PATH
 sudo apt install golang-go unzip
 ```
 
-### Red Hat based (CentOS/Fedora/Amazon Linux)
+### Red Hat based (CentOS/Fedora/Amazon Linux) Prerequisites
 
 Install dependencies:
 
